@@ -5,19 +5,10 @@ services:
    POSTGRES_PASSWORD: 123
   volumes:
    - db_data:/var/lib/postgresql/data
- init-db:
-  image: postgres:15
-  depends_on:
-   -db
-  environment:
-   PGPASSWORD: 123
-  volumes:
-   - ./init.sql:/init.sql
-   - ./init_db.sh:/init_db.sh
-  command: ["sh", "/init_db.sh"]	
+ 
  app:
   build: .
   ports:
    - "5000:5000"
   depends_on:
-   - init-db
+   - db
