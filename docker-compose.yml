@@ -3,8 +3,6 @@ services:
   image: postgres:15
   environment:
    POSTGRES_PASSWORD: 123
-  volumes:
-   - db_data:/var/lib/postgresql/data
  
  app:
   build: .
@@ -14,4 +12,4 @@ services:
    - db
    
  volumes:
-  db_data: {}
+  db_data:
