@@ -14,13 +14,10 @@ services:
   volumes:
    - ./init.sql:/init.sql
    - ./init-db.sh:/init-db.sh
-  command: ["/init-db.sh"]
-			
+  command: ["/init-db.sh"]	
  app:
   build: .
   ports:
    - "5000:5000"
   depends_on:
    - init-db
-
-			
