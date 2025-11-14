@@ -3,13 +3,19 @@ services:
     image: postgres:15
     environment:
       POSTGRES_PASSWORD: "123"
+    healthcheck:
+      test: ["CMD-SHELL", "pg-isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
  
   app:
     build: .
     ports:
       - "5000:5000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
    
 volumes:
   db_data:
