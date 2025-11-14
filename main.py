@@ -10,15 +10,6 @@ def dataBase():
         password='123'
     )
     return conn
-    
-@app.before_first_request
-def create_table():
-    conn = dataBase()
-    cursor = conn.cursor()
-    cursor.execute("CREATE TABLE IF NOT EXISTS visits (id SERIAL PRIMARY KEY, ip VARCHAR(50))")
-    conn.commit()
-    cursor.close()
-    conn.close()
 
 @app.route('/ping')
 def ping():
