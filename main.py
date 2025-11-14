@@ -3,9 +3,8 @@ import psycopg2
 import time
 
 app = Flask(__name__)
-
+time.sleep(15)
 def dataBase():
-    time.sleep(10)
     conn = psycopg2.connect(
         host='db'
         database='postgres'
