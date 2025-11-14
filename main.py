@@ -1,6 +1,6 @@
 from flask import Flask, request
 import psycopg2
-imoport time
+import time
 
 time.sleep(10)
 
