@@ -1,9 +1,11 @@
 from flask import Flask, request
 import psycopg2
+import time
 
 app = Flask(__name__)
 
 def dataBase():
+    time.sleep(10)
     conn = psycopg2.connect(
         host='db'
         database='postgres'
