@@ -1,2 +1,2 @@
-pcycopg2
+pcycopg2-binary
 flaskapi
