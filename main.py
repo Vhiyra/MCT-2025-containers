@@ -24,7 +24,7 @@ def ping():
         conn.commit()
         cursor.close()
         conn.close()
-        return "pong\n"
+        return "pong"
     except Exception as e:
         conn = dataBase()
         cursor = conn.cursor()
@@ -42,4 +42,4 @@ def visits():
     t = cursor.fetchone()[0]
     cursor.close()
     conn.close()
-    return str(t) + '\n'
+    return str(t)
