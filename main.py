@@ -15,27 +15,30 @@ def dataBase():
 def create_table():
     conn = dataBase()
     cursor = conn.cursor()
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS visits (
-            id SERIAL PRIMARY KEY,
-            ip VARCHAR(50),
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
-    """)
+    cursor.execute("CREATE TABLE IF NOT EXISTS visits (id SERIAL PRIMARY KEY, ip VARCHAR(50))")
     conn.commit()
     cursor.close()
     conn.close()
 
 @app.route('/ping')
 def ping():
-    ip = request.remote_addr
-    conn = dataBase()
-    cursor = conn.cursor()
-    cursor.execute("INSERT INTO visits (ip) VALUES (%s)", (ip,))
-    conn.commit()
-    cursor.close()
-    conn.close()
-    return "pong\n"
+    try:
+        ip = request.remote_addr
+        conn = dataBase()
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO visits (ip) VALUES (%s)", (ip,))
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return "pong\n"
+    except Exception as e:
+        conn = dataBase()
+        cursor = conn.cursor()
+        cursor.execute("CREATE TABLE IF NOT EXISTS visits (id SERIAL PRIMARY KEY, ip VARCHAR(50))")
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return ping()
 
 @app.route('/visits')
 def visits():
